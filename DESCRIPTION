@@ -1,0 +1,16 @@
+Package: disgraph
+Type: Package
+Title: Graph distance utility package.
+Version: 1.0.0.9000
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
+Imports:
+    magrittr
+Suggests:
+    testthat
