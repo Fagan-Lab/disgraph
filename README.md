@@ -3,7 +3,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Graph distance utilities in R.
+Graph network distance utilities in R.
 
 ## Installation
 
