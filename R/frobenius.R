@@ -1,12 +1,13 @@
 #' Frobenius norm
 #'
 #' @export
-frobenius <- function(graph_1, graph_2) UseMethod("frobenius")
+dist_frobenius <- function(graph_1, graph_2) UseMethod("dist_frobenius")
 
 #' @export
-frobenius.igraph <- function(graph_1, graph_2) {
+dist_frobenius.igraph <- function(graph_1, graph_2) {
   assertthat::assert_that(
-    all(igraph::is.igraph(graph_1), igraph::is.igraph(graph_2))
+    all(igraph::is.igraph(graph_1), igraph::is.igraph(graph_2)),
+    msg = "Graphs must be igraph objects."
   )
 
   frobenius.igraph(
@@ -16,10 +17,10 @@ frobenius.igraph <- function(graph_1, graph_2) {
 }
 
 #' @export
-frobenius.matrix <- function(graph_1, graph_2) {
+dist_frobenius.matrix <- function(G1, G2) {
   assertthat::assert_that(
-    all(is.matrix(graph_1), is.matrix(graph_2))
+    all(is.matrix(G1), is.matrix(G2))
   )
 
-  norm(graph_1 - graph_2, "F")
+  norm(G1 - G2, "F")
 }
