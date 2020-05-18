@@ -10,9 +10,9 @@ dist_frobenius.igraph <- function(graph_1, graph_2) {
     msg = "Graphs must be igraph objects."
   )
 
-  frobenius.matrix(
-    graph_1 %>% igraph::as_adjacency_matrix(),
-    graph_2 %>% igraph::as_adjacency_matrix(),
+  dist_frobenius.matrix(
+    graph_1 %>% igraph::as_adjacency_matrix(sparse = FALSE),
+    graph_2 %>% igraph::as_adjacency_matrix(sparse = FALSE)
   )
 }
 
