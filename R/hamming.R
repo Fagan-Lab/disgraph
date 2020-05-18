@@ -25,13 +25,13 @@ dist_hamming.igraph <- function(graph_1, graph_2) {
 }
 
 #' @export
-dist_hamming.matrix <- function(G1, G2) {
+dist_hamming.matrix <- function(graph_1, graph_2) {
   assertthat::assert_that(
-    length(G1) == length(G2),
+    length(graph_1) == length(graph_2),
     msg = "Graphs must have the same number of nodes."
   )
 
-  e1071::hamming.distance(G1, G2)
+  e1071::hamming.distance(graph_1, graph_2)
 }
 
 #' @export

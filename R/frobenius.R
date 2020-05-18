@@ -10,17 +10,17 @@ dist_frobenius.igraph <- function(graph_1, graph_2) {
     msg = "Graphs must be igraph objects."
   )
 
-  frobenius.igraph(
+  frobenius.matrix(
     graph_1 %>% igraph::as_adjacency_matrix(),
     graph_2 %>% igraph::as_adjacency_matrix(),
   )
 }
 
 #' @export
-dist_frobenius.matrix <- function(G1, G2) {
+dist_frobenius.matrix <- function(graph_1, graph_2) {
   assertthat::assert_that(
-    all(is.matrix(G1), is.matrix(G2))
+    all(is.matrix(graph_1), is.matrix(graph_2))
   )
 
-  norm(G1 - G2, "F")
+  norm(graph_1 - graph_2, "F")
 }

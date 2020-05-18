@@ -21,7 +21,7 @@ dist_jaccard.igraph <- function(graph_1, graph_2) {
 
         if (is.null(head_id) || is.null(tail_id) || length(head_id) != length(tail_id)) {
           return(
-            paste0(edge_list[, 1] ,edge_list[, 2])
+            paste0(edge_list[, 1], edge_list[, 2])
           )
         }
 
