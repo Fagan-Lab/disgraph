@@ -45,13 +45,6 @@ dist_ipsen_mikhailov.matrix <- function(graph_1, graph_2, hwhm=0.08, results_lis
   norm1 <- (N - 1) * pi / 2 - sum(atan(-w1 / hwhm))
   norm2 <- (N - 1) * pi / 2 - sum(atan(-w2 / hwhm))
   
-  density_helper <- function (a,b) {
-    al <- as.list(a)
-    lb <- length(b)
-    arep <- lapply(al, {function (x) sum(hwhm / ((x - b)^2 + hwhm^2))})
-    unlist(arep)
-  }
-  
   # define spectral densities
   density1 <- function(w) {
     sum(hwhm / ((w - w1)^2 + hwhm^2)) / norm1
