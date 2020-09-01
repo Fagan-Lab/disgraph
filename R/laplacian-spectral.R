@@ -7,7 +7,7 @@ dist_laplacian_spectral <- function(
   normed=TRUE,
   kernel="normal",
   hwhm=0.011775,
-  measure="jensen-shannon",
+  measure="jensen-shannon",  # Can be "jensen-shannon" or "euclidean"
   k=NULL,
   which="LM"
 ) UseMethod("dist_laplacian_spectral")
