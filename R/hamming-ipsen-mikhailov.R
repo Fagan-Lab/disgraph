@@ -30,31 +30,31 @@ dist_hamming_ipsen_mikhailov.matrix <- function (graph_1, graph_2, combination_f
   results[[ "adjacency_matrices" ]] <- c(graph_1, graph_2)
   
   # number of vertices
-  N = dim(graph_1)[1]
+  N <- dim(graph_1)[1]
   
-  directed = !(isSymmetric(graph_1) && isSymmetric(graph_2))
+  directed <- !(isSymmetric(graph_1) && isSymmetric(graph_2))
   
   if (directed) {
-    null_mat = matrix(0,N,N)
+    null_mat <- matrix(0,N,N)
     
     # create augmented adjacency matrices
-    g1_aug = rbind(cbind(null_mat, t(graph_1)), cbind(graph_1, null_mat))
-    g2_aug = rbind(cbind(null_mat, t(graph_2)), cbind(graph_2, null_mat))
+    g1_aug <- rbind(cbind(null_mat, t(graph_1)), cbind(graph_1, null_mat))
+    g2_aug <- rbind(cbind(null_mat, t(graph_2)), cbind(graph_2, null_mat))
     results[[ "augmented_adjacency_matrices" ]] <- c(g1_aug, g2_aug)
     
     # get Hamming distance
-    H = sum(abs(g1_aug - g2_aug)) / (2 * N * (N - 1))
+    H <- sum(abs(g1_aug - g2_aug)) / (2 * N * (N - 1))
     results[[ "hamming_dist" ]] <- H
     
     # calculate half-width at half-max
     hwhm <- get_hwhm_directed(N)
     results[[ "hwhm" ]] <- hwhm
     
-    IM = dist_ipsen_mikhailov(g1_aug, g2_aug, hwhm)
+    IM <- dist_ipsen_mikhailov(g1_aug, g2_aug, hwhm)
     results[[ "IM" ]] <- IM
   } else {
     # get Hamming distance
-    H = sum(abs(graph_1 - graph_2)) / (2 * N * (N - 1))
+    H <- sum(abs(graph_1 - graph_2)) / (2 * N * (N - 1))
     results[[ "hamming_dist" ]] <- H
     
     # calculate half-width at half-max
@@ -62,12 +62,12 @@ dist_hamming_ipsen_mikhailov.matrix <- function (graph_1, graph_2, combination_f
     results[[ "hwhm" ]] <- hwhm
     
     # get Ipsen-Mikhailov distance
-    IM = dist_ipsen_mikhailov(graph_1, graph_2, hwhm)
+    IM <- dist_ipsen_mikhailov(graph_1, graph_2, hwhm)
     results[[ "IM" ]] <- IM
   }
   
   # combine H and IM distances
-  HIM = sqrt(H^2 + combination_factor * IM^2) / sqrt(1 + combination_factor)
+  HIM <- sqrt(H^2 + combination_factor * IM^2) / sqrt(1 + combination_factor)
   results[[ "HIM" ]]
   
   # return the optional results list
