@@ -27,7 +27,7 @@ dist_hamming_ipsen_mikhailov.matrix <- function (graph_1, graph_2, combination_f
   
   # create optional results list
   results <- list()
-  results[[ "adjacency_matrices" ]] <- c(graph_1, graph_2)
+  results[[ "adjacency_matrices" ]] <- list(graph_1, graph_2)
   
   # number of vertices
   N <- dim(graph_1)[1]
@@ -40,7 +40,7 @@ dist_hamming_ipsen_mikhailov.matrix <- function (graph_1, graph_2, combination_f
     # create augmented adjacency matrices
     g1_aug <- rbind(cbind(null_mat, t(graph_1)), cbind(graph_1, null_mat))
     g2_aug <- rbind(cbind(null_mat, t(graph_2)), cbind(graph_2, null_mat))
-    results[[ "augmented_adjacency_matrices" ]] <- c(g1_aug, g2_aug)
+    results[[ "augmented_adjacency_matrices" ]] <- list(g1_aug, g2_aug)
     
     # get Hamming distance
     H <- sum(abs(g1_aug - g2_aug)) / (2 * N * (N - 1))
