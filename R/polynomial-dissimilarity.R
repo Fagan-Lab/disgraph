@@ -49,6 +49,8 @@ similarity_score <- function (A, k, alpha) {
   Q <- e$vectors 
   n <- nrow(A)
   
-  W = Diagonal(sum(sapply(1:k, (eig_vals ** kp / (n - 1) ** (alpha * (kp - 1))))))
+  W = Diagonal(sum(sapply(1:k,  function(kp) {
+    eig_vals ** kp / (n - 1) ** (alpha * (kp - 1))
+  })))
   dot(dot(Q, W), t(Q))
 }
