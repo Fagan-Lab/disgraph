@@ -1,6 +1,7 @@
 # disgraph
 
 <!-- badges: start -->
+[![CircleCI build status](https://circleci.com/gh/Fagan-Lab/disgraph.svg?style=svg)](https://circleci.com/gh/Fagan-Lab/disgraph)
 <!-- badges: end -->
 
 Graph network distance utilities in R.
