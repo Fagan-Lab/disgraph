@@ -1,5 +1,7 @@
+library(pracma)
+
 #'  polynomial_dissimilarity
-#' 
+#'  Compares polynomials relating to the eigenvalues of the adjacency matrices 
 #' @export
 dist_polynomial_dissimilarity <- function (graph_1, graph_2, k=5, alpha=1) UseMethod("dist_polynomial_dissimilarity")
 
@@ -17,7 +19,12 @@ dist_polynomial_dissimilarity.igraph <- function (graph_1, graph_2, k=5, alpha=1
     alpha
   )
 }
-
+#' Compares Polynomials relating to eigenvalues of adjacency matrices
+#' @param  G1 (nx.Graph) networkx graphs to be compared
+#' @param G2 (nx.Graph) networkx graphs to be compared
+#' @param K maximum degree of the polynomial
+#' @param alpha weighting factor
+#' @return The dist (float) Polynomial Dissimilarity between G1, G2 in a structure dist and G1,G2 are matrices
 #' @export
 dist_polynomial_dissimilarity.matrix <- function (graph_1, graph_2, k=5, alpha=1) {
   assertthat::assert_that(
@@ -30,18 +37,24 @@ dist_polynomial_dissimilarity.matrix <- function (graph_1, graph_2, k=5, alpha=1
   
   P_A1 <- similarity_score(A1, k, alpha)
   P_A2 <- similarity_score(A2, k, alpha)
+  difference <- P_A1 - P_A2
   
-  dist <- norm(P_A1 - P_A2, type = c("F"))/ nrow(A1)**2
+  currDist <- norm(difference, type = c("F"))/ nrow(A1)**2
 
   structure(
    list(
       adjacency_matrices = c(graph_1, graph_2),
-      dist = dist
+      dist = currDist
    ),
    class = "polynomial_dissimilarity")
  }
 
-# Calculate the similarity score used in the polynomial dissimilarity distance. 
+#' Calculate the similarity score used in the polynomial dissimilarity distance. 
+#' @param  A adjacency matrix
+#' @param K maximum degree of the polynomial
+#' @param alpha weighting factor
+#' @return similarity score
+#' @export
 similarity_score <- function (A, k, alpha) {
   
   e <- eigen(A)
@@ -49,7 +62,7 @@ similarity_score <- function (A, k, alpha) {
   Q <- e$vectors 
   n <- nrow(A)
   
-  W = Diagonal(sum(sapply(1:k,  function(kp) {
+  W = diag(sum(sapply(1:k,  function(kp) {
     eig_vals ** kp / (n - 1) ** (alpha * (kp - 1))
   })))
   dot(dot(Q, W), t(Q))
