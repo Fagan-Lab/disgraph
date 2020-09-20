@@ -1,6 +1,6 @@
 Package: disgraph
 Type: Package
-Title: Graph distance utility package.
+Title: Graph Distance Utility Package.
 Version: 0.1.0.9000
 Authors@R: c(
     person("Travis", "Byrum", email = "tbyrum@terpmail.umd.edu",
