@@ -62,5 +62,6 @@ similarity_score <- function (A, k, alpha) {
   W = diag(sum(sapply(1:k,  function(kp) {
     eig_vals ** kp / (n - 1) ** (alpha * (kp - 1))
   })))
-  pracma::dot(pracma::dot(Q, W), t(Q))
+  
+  (Q%*%W)%*%(t(Q))
 }
