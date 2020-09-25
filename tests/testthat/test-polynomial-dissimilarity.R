@@ -5,7 +5,7 @@ MAX_ERROR <- 0.01
 ### Testing Polynomial Dissimilarity ------------------------------------------------
 test_that("Test Zero Polynomial Dissimilarity", {
   graph <- matrix(
-    cbind(
+    rbind(
       	c(0, 1, 0, 0, 0, 1),
       	c(0, 0, 1, 0, 0, 1),
       	c(1, 1, 1, 0, 1, 1),
@@ -23,7 +23,7 @@ test_that("Test Zero Polynomial Dissimilarity", {
 test_that("Test Polynomial Dissimilarity is Correctly Calculated", {
 
   graph <- matrix(
-    cbind(
+    rbind(
       	c(0, 1, 0, 0, 0, 1),
       	c(0, 0, 1, 0, 0, 1),
       	c(1, 1, 1, 0, 1, 1),
@@ -35,7 +35,7 @@ test_that("Test Polynomial Dissimilarity is Correctly Calculated", {
   )
 
   graph2 <- matrix(
-    cbind(
+    rbind(
       	c(0, 0, 0, 1, 1, 0),
       	c(1, 0, 1, 0, 1, 1),
       	c(1, 0, 0, 1, 0, 0),
