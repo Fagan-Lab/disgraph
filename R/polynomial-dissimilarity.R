@@ -1,5 +1,3 @@
-library(pracma)
-
 #'  polynomial_dissimilarity
 #'  Compares polynomials relating to the eigenvalues of the adjacency matrices 
 #' @export
@@ -56,7 +54,6 @@ dist_polynomial_dissimilarity.matrix <- function (graph_1, graph_2, k=5, alpha=1
 #' @return similarity score
 #' @export
 similarity_score <- function (A, k, alpha) {
-  
   e <- eigen(A)
   eig_vals <- e$values
   Q <- e$vectors 
@@ -65,5 +62,5 @@ similarity_score <- function (A, k, alpha) {
   W = diag(sum(sapply(1:k,  function(kp) {
     eig_vals ** kp / (n - 1) ** (alpha * (kp - 1))
   })))
-  dot(dot(Q, W), t(Q))
+  pracma::dot(pracma::dot(Q, W), t(Q))
 }
