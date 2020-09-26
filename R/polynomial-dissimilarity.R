@@ -59,9 +59,13 @@ similarity_score <- function (A, k, alpha) {
   Q <- e$vectors 
   n <- nrow(A)
   
-  W = diag(sum(sapply(1:k,  function(kp) {
-    eig_vals ** kp / (n - 1) ** (alpha * (kp - 1))
-  })))
+  x = sapply(0:k+1, function(kp) {
+    (eig_vals ** kp) / ((n - 1) ** (alpha * (kp - 1)))
+  })
+
+  sumAllRows <- (rowSums(x))
   
-  (Q%*%W)%*%(t(Q))
+  W = diag(sumAllRows)
+  (Q%*%W)%*%t(Q)
 }
+

@@ -47,5 +47,5 @@ test_that("Test Polynomial Dissimilarity is Correctly Calculated", {
   )
   
   dist_poly <- dist_polynomial_dissimilarity(graph, graph2)
-  expect_true(dist_poly - 0.1506 < MAX_ERROR)
+  expect_true((dist_poly$dist - 0.1506) < MAX_ERROR)
 })
