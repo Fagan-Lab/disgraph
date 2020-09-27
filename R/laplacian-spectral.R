@@ -1,6 +1,3 @@
-#' Laplacian spectral method
-#' 
-#' @export
 dist_laplacian_spectral <- function(
   graph_1,
   graph_2,
@@ -12,7 +9,6 @@ dist_laplacian_spectral <- function(
   which="LM"
 ) UseMethod("dist_laplacian_spectral")
 
-#' @export
 dist_laplacian_spectral.igraph <- function(
   graph_1,
   graph_2,
@@ -27,5 +23,4 @@ dist_laplacian_spectral.igraph <- function(
     all(igraph::is.igraph(graph_1), igraph::is.igraph(graph_2)),
     msg = "Graphs must be igraph objects."
   )
-  
 }

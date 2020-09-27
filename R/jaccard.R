@@ -1,5 +1,10 @@
 #' Jaccard Distance
 #'
+#' Graph distance based on the Jaccard index between edge sets.
+#'
+#' @param graph_1 igraph or matrix object.
+#' @param graph_2 igraph or matrix object.
+#'
 #' @export
 dist_jaccard <- function(graph_1, graph_2) UseMethod("dist_jaccard")
 
@@ -36,9 +41,9 @@ dist_jaccard.igraph <- function(graph_1, graph_2) {
 }
 
 #' @export
-dist_jaccard.matrix <- function(G1, G2) {
+dist_jaccard.matrix <- function(graph_1, graph_2) {
   dist_jaccard.igraph(
-    igraph::graph.adjacency(G1, mode = "undirected"),
-    igraph::graph.adjacency(G2, mode = "undirected")
+    igraph::graph.adjacency(graph_1, mode = "undirected"),
+    igraph::graph.adjacency(graph_2, mode = "undirected")
   )
 }

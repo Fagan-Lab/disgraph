@@ -1,5 +1,12 @@
-#' Hamming Ipsen Mikhailov
-#' 
+#' Hamming Ipsen Mikhailov Distance
+#'
+#' @param graph_1 igraph or matrix object.
+#' @param graph_2 igraph or matrix object.
+#' @param combination_factor Numeric factor to be combined with IM metric.
+#' @param results_list Logical indicating whether or not to return results list.
+#'
+#' @return A numeric distance metric or optional
+#'
 #' @export
 dist_hamming_ipsen_mikhailov <- function (graph_1, graph_2, combination_factor=1, results_list=FALSE) UseMethod("dist_hamming_ipsen_mikhailov")
 
@@ -9,7 +16,7 @@ dist_hamming_ipsen_mikhailov.igraph <- function (graph_1, graph_2, combination_f
     all(igraph::is.igraph(graph_1), igraph::is.igraph(graph_2)),
     msg = "Graphs must be igraph objects."
   )
-  
+
   dist_hamming_ipsen_mikhailov.matrix(
     igraph::as_adj(graph_1, sparse=FALSE),
     igraph::as_adj(graph_2, sparse=FALSE),
@@ -24,52 +31,52 @@ dist_hamming_ipsen_mikhailov.matrix <- function (graph_1, graph_2, combination_f
     all(is.matrix(graph_1), is.matrix(graph_2)),
     msg = "Graphs must be adjacency matrices."
   )
-  
+
   # create optional results list
   results <- list()
   results[[ "adjacency_matrices" ]] <- c(graph_1, graph_2)
-  
+
   # number of vertices
   N = dim(graph_1)[1]
-  
+
   directed = !(isSymmetric(graph_1) && isSymmetric(graph_2))
-  
+
   if (directed) {
     null_mat = matrix(0,N,N)
-    
+
     # create augmented adjacency matrices
     g1_aug = rbind(cbind(null_mat, t(graph_1)), cbind(graph_1, null_mat))
     g2_aug = rbind(cbind(null_mat, t(graph_2)), cbind(graph_2, null_mat))
     results[[ "augmented_adjacency_matrices" ]] <- c(g1_aug, g2_aug)
-    
+
     # get Hamming distance
     H = sum(abs(g1_aug - g2_aug)) / (2 * N * (N - 1))
     results[[ "hamming_dist" ]] <- H
-    
+
     # calculate half-width at half-max
     hwhm <- get_hwhm_directed(N)
     results[[ "hwhm" ]] <- hwhm
-    
+
     IM = dist_ipsen_mikhailov(g1_aug, g2_aug, hwhm)
     results[[ "IM" ]] <- IM
   } else {
     # get Hamming distance
     H = sum(abs(graph_1 - graph_2)) / (2 * N * (N - 1))
     results[[ "hamming_dist" ]] <- H
-    
+
     # calculate half-width at half-max
     hwhm <- get_hwhm_undirected(N)
     results[[ "hwhm" ]] <- hwhm
-    
+
     # get Ipsen-Mikhailov distance
     IM = dist_ipsen_mikhailov(graph_1, graph_2, hwhm)
     results[[ "IM" ]] <- IM
   }
-  
+
   # combine H and IM distances
   HIM = sqrt(H^2 + combination_factor * IM^2) / sqrt(1 + combination_factor)
   results[[ "HIM" ]]
-  
+
   # return the optional results list
   if (results_list) {
     results
@@ -83,7 +90,7 @@ get_hwhm_undirected <- function (n_nodes) {
   func <- function(g) {
     n_sqrt <- sqrt(n_nodes)
     v <- atan(n_sqrt/g)
-    
+
     (
       -1
       + 1 / (pi * g)
@@ -94,8 +101,8 @@ get_hwhm_undirected <- function (n_nodes) {
       / ((pi / 2 + v) * pi * (4 * g^2 + n_nodes))
     )
   }
-  
-  uniroot(func, c(0.01, 1))$root
+
+  stats::uniroot(func, c(0.01, 1))$root
 }
 
 # calculates optimal half-width at half-max for directed graphs
@@ -130,7 +137,7 @@ get_hwhm_directed <- function (N) {
         4 * g ** 3 + g * T - 2 * g * sqrt(U * T) + g * U
       )
     }
-    
+
     (
       -1
       + Z ** 2 * M0
@@ -143,8 +150,8 @@ get_hwhm_directed <- function (N) {
       + 2 * W * Wp * L(Nm2, 2 * N - 2)
       + 2 * W * Wp * L(N, 2 * N - 2)
     )
-    
+
   }
-  
-  uniroot(func, c(0.01, 1))$root
+
+  stats::uniroot(func, c(0.01, 1))$root
 }
