@@ -1,6 +1,6 @@
 Package: disgraph
 Type: Package
-Title: Graph Distance Utility Package.
+Title: Graph Distance Utility Package
 Version: 0.1.0.9000
 Authors@R: c(
     person("Travis", "Byrum", email = "tbyrum@terpmail.umd.edu",
@@ -18,7 +18,8 @@ RoxygenNote: 7.0.2
 Imports:
     magrittr,
     igraph,
-    pracma
+    pracma,
+    assertthat
 Suggests:
     testthat
 Depends:
