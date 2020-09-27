@@ -11,25 +11,25 @@
 #' in a structure dist
 #'
 #' @export
-dist_polynomial_dissimilarity <- function (graph_1, graph_2, k=5, alpha=1) UseMethod("dist_polynomial_dissimilarity")
+dist_polynomial_dissimilarity <- function(graph_1, graph_2, k = 5, alpha = 1) UseMethod("dist_polynomial_dissimilarity")
 
 #' @export
-dist_polynomial_dissimilarity.igraph <- function (graph_1, graph_2, k=5, alpha=1) {
+dist_polynomial_dissimilarity.igraph <- function(graph_1, graph_2, k = 5, alpha = 1) {
   assertthat::assert_that(
     all(igraph::is.igraph(graph_1), igraph::is.igraph(graph_2)),
     msg = "Graphs must be igraph objects."
   )
 
   dist_polynomial_dissimilarity.matrix(
-    igraph::as_adj(graph_1, sparse=FALSE),
-    igraph::as_adj(graph_2, sparse=FALSE),
+    igraph::as_adj(graph_1, sparse = FALSE),
+    igraph::as_adj(graph_2, sparse = FALSE),
     k,
     alpha
   )
 }
 
 #' @export
-dist_polynomial_dissimilarity.matrix <- function (graph_1, graph_2, k=5, alpha=1) {
+dist_polynomial_dissimilarity.matrix <- function(graph_1, graph_2, k = 5, alpha = 1) {
   assertthat::assert_that(
     all(is.matrix(graph_1), is.matrix(graph_2)),
     msg = "Graphs must be adjacency matrices."
@@ -42,28 +42,29 @@ dist_polynomial_dissimilarity.matrix <- function (graph_1, graph_2, k=5, alpha=1
   P_A2 <- similarity_score(A2, k, alpha)
   difference <- P_A1 - P_A2
 
-  currDist <- norm(difference, type = c("F"))/ nrow(A1)**2
+  currDist <- norm(difference, type = c("F")) / nrow(A1)**2
 
   structure(
     list(
       adjacency_matrices = c(graph_1, graph_2),
       dist = currDist
     ),
-    class = "polynomial_dissimilarity")
+    class = "polynomial_dissimilarity"
+  )
 }
 
-similarity_score <- function (A, k, alpha) {
+similarity_score <- function(A, k, alpha) {
   e <- eigen(A)
   eig_vals <- e$values
   Q <- e$vectors
   n <- nrow(A)
 
-  x = sapply(0:k+1, function(kp) {
-    (eig_vals ** kp) / ((n - 1) ** (alpha * (kp - 1)))
+  x <- sapply(0:k + 1, function(kp) {
+    (eig_vals**kp) / ((n - 1)**(alpha * (kp - 1)))
   })
 
   sumAllRows <- (rowSums(x))
 
-  W = diag(sumAllRows)
-  (Q%*%W)%*%t(Q)
+  W <- diag(sumAllRows)
+  (Q %*% W) %*% t(Q)
 }

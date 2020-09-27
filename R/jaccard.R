@@ -21,8 +21,8 @@ dist_jaccard.igraph <- function(graph_1, graph_2) {
         graph <- igraph::as.undirected(graph)
         edge_list <- igraph::get.edgelist(graph)
 
-        head_id <-  igraph::vertex_attr(graph, "id", edge_list[, 1])
-        tail_id <-  igraph::vertex_attr(graph, "id", edge_list[, 2])
+        head_id <- igraph::vertex_attr(graph, "id", edge_list[, 1])
+        tail_id <- igraph::vertex_attr(graph, "id", edge_list[, 2])
 
         if (is.null(head_id) || is.null(tail_id) || length(head_id) != length(tail_id)) {
           return(
