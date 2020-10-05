@@ -106,6 +106,9 @@ dist_laplacian_spectral.matrix <- function(
     
     dist <- spectra_comparison(density1, density2, a, b, measure)
     results[[ "dist" ]] <- dist
+  } else {
+    dist <- norm(ev1 - ev2)
+    results[[ "dist" ]] <- dist
   }
   
   dist
@@ -185,10 +188,17 @@ spectra_comparison <- function(density1, density2, a, b, measure) {
   dist
 }
 
+# I have modified this function slightly from the netrd version because
+# as-is, for some inputs it returns a negative number which causes the
+# measurement to fail (return NaN). I think this modification is valid
+# but I'm not 100% sure.
 kullback_leiber <- function(f1, f2, a, b) {
   integrand <- function(x) {
     if (f1(x) > 0 && f2(x) > 0) {
       result <- f1(x) * log(f1(x) / f2(x))
+      if (result < 0) {
+        result <- 0
+      }
     } else {
       result = 0
     }
