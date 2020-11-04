@@ -18,14 +18,17 @@ dist_onion_divergence.igraph <- function (graph_1, graph_2, dist='lccm') {
 }
 
 #' @export
-dist_onion_divergence.matrix <- function (graph_1, graph_2, dist='lccm') {
-  assertthat::assert_that(
-    all(is.matrix(graph_1), is.matrix(graph_2)),
-    msg = "Graphs must be adjacency matrices."
-  )
+dist_onion_divergence <- function (graph_1, graph_2, dist='lccm') {
+ # assertthat::assert_that(
+#    all(is.matrix(graph_1), is.matrix(graph_2)),
+#    msg = "Graphs must be adjacency matrices."
+#  )
+  
+  #G1_simple <- graph_1
+  #G2_simple <- graph_2
 
-   G1_simple <- simplify(graph_1, remove.loops = TRUE)
-   G2_simple <- simplify(graph_2, remove.loops = TRUE)
+   G1_simple <- igraph::simplify(graph_1, remove.loops = TRUE)
+   G2_simple <- igraph::simplify(graph_2, remove.loops = TRUE)
    matrices_G1 <- create_sparse_matrices_for_graph(G1_simple)
    matrices_G2 <- create_sparse_matrices_for_graph(G2_simple)
 
@@ -41,7 +44,7 @@ dist_onion_divergence.matrix <- function (graph_1, graph_2, dist='lccm') {
    results[["lccm_dist"]] <- lccm_dist
    dist_id <- paste(dist, "_dist", sep = "")
    results[["dist"]] <- results[dist_id]
-   results[dist_id]
+   results
 }
 
 
@@ -56,28 +59,31 @@ onion_decomposition <- function (G){
     current_core = 0
     current_layer = 1
     local_layer = 1
-    while (gorder(G_copy) > 0) {
+    while (igraph::gorder(G_copy) > 0) {
         # Sets properly the current core.
-        degree_sequence = degree(G_copy)
+        degree_sequence = igraph::degree(G_copy)
         min_degree = min(degree_sequence)
         if (min_degree >= (current_core + 1)){
             current_core <- min_degree
             local_layer <- 1
         }
         # Identifies vertices in the current layer.
-        this_layer_ = vector()
-        for (v in V(G_copy)){
-          if (degree(G_copy, v) <= current_core){
-            this_layer_.append(v)
-          }
-        }
+        this_layer_ <- lapply(igraph::V(G_copy), function(v){ igraph::degree(G_copy, v) <= current_core})
+        print(this_layer_)
+        #numVertices <- V(G_copy)
+        #for (v in igraph::V(G_copy)){
+        #  if (igraph::degree(G_copy, v) <= current_core){
+        #    this_layer_[i] <- v
+        #  }
+        #  i = i + 1
+        #}
           
         # Identifies the core/layer of the vertices in the current layer.
         for (v in this_layer_){
           coreness_map[v] = current_core
           layer_map[v] = current_layer
           local_layer_map[v] = local_layer
-          delete_vertices(G_copy, v)
+          igraph::delete_vertices(G_copy, v)
         }
             
         # Updates the layer count.
@@ -128,7 +134,7 @@ create_sparse_matrices_for_graph <- function(G){
     lccm_values = vector()
     lccm_index = 0
     
-    for (n in V(G_copy)){
+    for (n in igraph::V(G_copy)){
       d1 = G_copy.degree(n)
       c1 = kcore[n]
       l1 = local_layer[n]
@@ -138,9 +144,9 @@ create_sparse_matrices_for_graph <- function(G){
       )
     }
     
-    for (e in E(G_copy)){
-      d1 = degree(G_copy, e[0])
-      d2 = degree(G_copy, e[1])
+    for (e in igraph::E(G_copy)){
+      d1 = igraph::degree(G_copy, e[0])
+      d2 = igraph::degree(G_copy, e[1])
       c1 = kcore[e[0]]
       c2 = kcore[e[1]]
       l1 = local_layer[e[0]]
@@ -159,10 +165,10 @@ create_sparse_matrices_for_graph <- function(G){
       )
     }
     
-    cm_values <- sapply(cm_values, function(x) {x / gorder(G_copy)})
-    ccm_values <- sapply(ccm_values, function(x){x / (2 * gsize(G_copy))})
-    lccm_values <- sapply(lccm_values, function(x){x / (2 * gsize(G_copy))}) 
-    lccm_node_values  <- sapply(lccm_node_values, function(x){x / (gorder(G_copy))})
+    cm_values <- sapply(cm_values, function(x) {x / igraph::gorder(G_copy)})
+    ccm_values <- sapply(ccm_values, function(x){x / (2 * igraph::gsize(G_copy))})
+    lccm_values <- sapply(lccm_values, function(x){x / (2 * igraph::gsize(G_copy))}) 
+    lccm_node_values  <- sapply(lccm_node_values, function(x){x / (igraph::gorder(G_copy))})
 
     # output the results in a listionary
     results = list()
