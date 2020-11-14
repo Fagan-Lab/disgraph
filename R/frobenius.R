@@ -1,4 +1,11 @@
-#' Frobenius norm
+#' Frobenius Distance
+#'
+#' Frobenius norm between two adjacency matrices.
+#'
+#' @param graph_1 igraph or matrix object.
+#' @param graph_2 igraph or matrix object.
+#'
+#' @return A numeric distance metric.
 #'
 #' @export
 dist_frobenius <- function(graph_1, graph_2) UseMethod("dist_frobenius")
