@@ -1,16 +1,20 @@
-#'  quantum_jsd
+library(expm)
+library(psych)
+library(Matrix)
+library(dplyr)
+#'  dist_quantum_jsd
 #'  Compares the spectral entropies of the density matrices
 #' @export
-quantum_jsd <- function (graph_1, graph_2, beta=0.1, q=NULL) UseMethod("quantum_jsd")
+dist_quantum_jsd <- function (graph_1, graph_2, beta=0.1, q=NULL) UseMethod("dist_quantum_jsd")
 
 #' @export
-quantum_jsd.igraph <- function (graph_1, graph_2, beta=0.1, q=NULL) {
+dist_quantum_jsd.igraph <- function (graph_1, graph_2, beta=0.1, q=NULL) {
   assertthat::assert_that(
     all(igraph::is.igraph(graph_1), igraph::is.igraph(graph_2)),
     msg = "Graphs must be igraph objects."
   )
   
-  quantum_jsd.matrix(
+  dist_quantum_jsd.matrix(
     igraph::as_adj(graph_1, sparse=FALSE),
     igraph::as_adj(graph_2, sparse=FALSE),
     beta,
@@ -24,7 +28,7 @@ quantum_jsd.igraph <- function (graph_1, graph_2, beta=0.1, q=NULL) {
 #' @param q weighting factor
 #' @return The dist (float) Polynomial Dissimilarity between G1, G2 in a structure dist and G1,G2 are matrices
 #' @export
-quantum_jsd.matrix <- function (graph_1, graph_2, beta=5, q=1) {
+dist_quantum_jsd.matrix <- function (graph_1, graph_2, beta=5, q=1) {
   assertthat::assert_that(
     all(is.matrix(graph_1), is.matrix(graph_2)),
     msg = "Graphs must be adjacency matrices."
@@ -52,7 +56,7 @@ quantum_jsd.matrix <- function (graph_1, graph_2, beta=5, q=1) {
       entropy_mixture = H0,
       dist = currDist
     ),
-    class = "quantum_jsd")
+    class = "dist_quantum_jsd")
 }
 
 #' Create the density matrix encoding probabilities for entropies. 
@@ -73,11 +77,14 @@ density_matrix <- function (A, beta) {
 #' @return Create the Renyi entropy
 #' @export
 renyi_entropy <- function (X, q=NULL) {
-  eigs <- eigen.Hermitian(X)
-  zero_eigenvalues <- all.equal.envRefClass(abs(eigs), 0, atol=1e-6)
-  eigs <- eigs[np$logical_not(zero_eigenvalues)]
+  eigs <- eigen(X)
+  eigs <- eigs$values
+  zero_eigenvalues <- near(abs(eigs), 0, tol = 1e-6)
+  #print(!zero_eigenvalues)
+  eigs <- eigs[!zero_eigenvalues]
+  print(eigs)
   
-  if(is.null(q) | q == 1){
+  if(is.null(q) || q == 1){
     H <- -1 * sum(eigs * log2(eigs))
   } else{
     prefactor = 1 / (1 - q)
