@@ -32,7 +32,7 @@ dist_ipsen_mikhailov.matrix <- function(graph_1, graph_2, hwhm = 0.08, results_l
 
   # initialize optional results list
   results <- list()
-  results[[ "adjacency_matrices" ]] <- list(graph_1, graph_2)
+  results[["adjacency_matrices"]] <- list(graph_1, graph_2)
 
   N <- dim(graph_1)[1]
 
