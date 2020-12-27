@@ -17,7 +17,7 @@ dist_polynomial_dissimilarity(graph_1, graph_2, k = 5, alpha = 1)
 }
 \value{
 A numeric polynomial dissimilarity between graph_1, graph_2
-in a structure dist
+  in a structure dist
 }
 \description{
 Compares polynomials relating to the eigenvalues of the adjacency matrices

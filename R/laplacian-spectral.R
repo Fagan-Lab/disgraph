@@ -1,3 +1,17 @@
+#' Laplacian Spectral Distance
+#'
+#' @param graph_1 igraph or matrix object.
+#' @param graph_2 igraph or matrix object.
+#' @param normed Logical parameter for the lorentzian kernel.
+#' @param kernel Character indicating kernel type. Can be "normal", "lorentzian", or NULL.
+#' @param hwhm Numeric indicating half width at half maximum.
+#' @param measure Character indicating measure type. Can be "jensen-shannon" or "euclidean".
+#' @param k Numeric indicating number of eigenvalues kept, NULL means all.
+#' @param which Character prioritizing which eigenvalues are kept, see get_eigvs below for more.
+#' @param results_list Boolean indicating whether to returns
+#'   just distance if FALSE, list of additional info if TRUE
+#'
+#' @export
 dist_laplacian_spectral <- function(
                                     graph_1,
                                     graph_2,

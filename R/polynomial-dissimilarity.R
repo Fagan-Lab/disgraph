@@ -8,7 +8,7 @@
 #' @param alpha Numeric weighting factor.
 #'
 #' @return A numeric polynomial dissimilarity between graph_1, graph_2
-#' in a structure dist
+#'   in a structure dist
 #'
 #' @export
 dist_polynomial_dissimilarity <- function(graph_1, graph_2, k = 5, alpha = 1) UseMethod("dist_polynomial_dissimilarity")
@@ -57,6 +57,7 @@ similarity_score <- function(A, k, alpha) {
   e <- eigen(A)
   eig_vals <- e$values
   Q <- e$vectors
+  c <- ncol(A)
   n <- nrow(A)
 
   x <- sapply(0:k + 1, function(kp) {
@@ -65,6 +66,6 @@ similarity_score <- function(A, k, alpha) {
 
   sumAllRows <- (rowSums(x))
 
-  W <- diag(sumAllRows)
+  W <- diag(sumAllRows, n, c)
   (Q %*% W) %*% t(Q)
 }

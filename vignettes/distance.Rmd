@@ -51,6 +51,4 @@ All of the following algorithms follow the same previous usage as above.
 | dist_hamming_ipsen_mikhailov | Hamming Ipsen Mikhailov Distance |
 | dist_ipsen_mikhailov | Ipsen Mikhailov Distance |
 | dist_laplacian_spectral | Laplacian Spectral Distance |
-| dist_onion_divergence | Onion Divergence Distance |
 | dist_polynomial_dissimilarity | Polynomial Dissimilarity Distance |
-| dist_quantum_jsd | Quantum JSD Distance |
