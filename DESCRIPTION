@@ -9,7 +9,7 @@ Authors@R: c(
     person("Anshuman", "Swain", email = "answain@terpmail.umd.edu",
            role = c("aut")),
     person("William", "Fagan", email = "bfagan@umd.edu",
-           role = c("aut")),
+           role = c("aut"))
     )
 Description: Collection of methods for network distance methods.
 License: MIT + file LICENSE
