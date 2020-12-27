@@ -61,7 +61,7 @@ similarity_score <- function(A, k, alpha) {
   n <- nrow(A)
 
   x <- sapply(0:k + 1, function(kp) {
-    (eig_vals**kp) / ((n - 1)**(alpha * (kp - 1)))
+    (eig_vals**kp) / ((n - 1) ** (alpha * (kp - 1)))
   })
 
   sumAllRows <- (rowSums(x))

@@ -146,7 +146,7 @@ create_continuous_spectrum <- function(eigenvalues, kernel, hwhm, a, b) {
   if (kernel == "normal") {
     std <- hwhm / 1.1775
     f <- function(x, xp) {
-      exp(-((x - xp)^2) / (2 * std^2)) / sqrt(2 * pi * std^2)
+      exp(- ((x - xp)^2) / (2 * std^2)) / sqrt(2 * pi * std^2)
     }
     F <- function(x, xp) {
       (1 + erf((x - xp) / (sqrt(2) * std))) / 2
