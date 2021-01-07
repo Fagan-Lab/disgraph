@@ -1,7 +1,3 @@
-library(expm)
-library(psych)
-library(Matrix)
-library(dplyr)
 #'  dist_quantum_jsd
 #'  Compares the spectral entropies of the density matrices
 #' @export
@@ -24,9 +20,8 @@ dist_quantum_jsd.igraph <- function (graph_1, graph_2, beta=0.1, q=NULL) {
 #' Compares Polynomials relating to eigenvalues of adjacency matrices
 #' @param  G1 (nx.Graph) networbetax graphs to be compared
 #' @param G2 (nx.Graph) networbetax graphs to be compared
-#' @param beta maximum degree of the polynomial
-#' @param q weighting factor
-#' @return The dist (float) Polynomial Dissimilarity between G1, G2 in a structure dist and G1,G2 are matrices
+#' @param p norm to take difference between resistance
+#' @return The dist (float) Polynomial Dissimilarity between G1, G2
 #' @export
 dist_quantum_jsd.matrix <- function (graph_1, graph_2, beta=5, q=1) {
   assertthat::assert_that(
@@ -66,7 +61,7 @@ dist_quantum_jsd.matrix <- function (graph_1, graph_2, beta=5, q=1) {
 #' @export
 density_matrix <- function (A, beta) {
   L <- diag(rowSums(A)) - A
-  rho = expm(-1 * beta * L)
+  rho = expm::expm(-1 * beta * L)
   rho = rho / tr(rho)
   rho
 }
