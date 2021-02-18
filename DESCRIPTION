@@ -11,7 +11,7 @@ Authors@R: c(
     person("William", "Fagan", email = "bfagan@umd.edu",
            role = c("aut"))
     )
-Description: Collection of methods for network distance methods.
+Description: Collection of methods for network distance methods. Install using devtools::install_github.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

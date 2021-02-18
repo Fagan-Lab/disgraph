@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 [![CircleCI build status](https://circleci.com/gh/Fagan-Lab/disgraph.svg?style=svg)](https://circleci.com/gh/Fagan-Lab/disgraph)
+[![R build status](https://github.com/travisbyrum/disgraph/workflows/R-CMD-check/badge.svg)](https://github.com/travisbyrum/disgraph/actions)
 <!-- badges: end -->
 
 Graph network distance utilities in R.
