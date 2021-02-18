@@ -8,10 +8,10 @@ Graph network distance utilities in R.
 
 ## Installation
 
-You can install the released version of disgraph from [CRAN](https://CRAN.R-project.org) with:
+You can install the current version of the package from GitHub directly using (through the devtools package):
 
 ``` r
-install.packages("disgraph")
+install_github("Fagan-Lab/disgraph")
 ```
 
 ## Examples
