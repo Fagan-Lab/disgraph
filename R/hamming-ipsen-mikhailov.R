@@ -132,7 +132,7 @@ get_hwhm_directed <- function(N) {
     L <- function(T, U) {
       (-log(g**2 + U) + log(g**2 + T)) / (
         (4 * g**2 + T + 3 * U) * sqrt(T)
-          - (4 * g**2 + 3 * T + U) * sqrt(U)
+        - (4 * g**2 + 3 * T + U) * sqrt(U)
       ) + (pi + atan(sqrt(T) / g) + atan(sqrt(U) / g)) / (
         4 * g**3 + g * T - 2 * g * sqrt(U * T) + g * U
       )
@@ -141,14 +141,14 @@ get_hwhm_directed <- function(N) {
     (
       -1
       + Z**2 * M0
-        + W**2 * (MNm2 + MN)
-        + Wp**2 * M2Nm2
-        - 2 * Z * W * L(0, Nm2)
-        - 2 * Z * W * L(0, N)
-        - 2 * Z * Wp * L(0, 2 * N - 2)
-        + 2 * W**2 * L(Nm2, N)
-        + 2 * W * Wp * L(Nm2, 2 * N - 2)
-        + 2 * W * Wp * L(N, 2 * N - 2)
+      + W**2 * (MNm2 + MN)
+      + Wp**2 * M2Nm2
+      - 2 * Z * W * L(0, Nm2)
+      - 2 * Z * W * L(0, N)
+      - 2 * Z * Wp * L(0, 2 * N - 2)
+      + 2 * W**2 * L(Nm2, N)
+      + 2 * W * Wp * L(Nm2, 2 * N - 2)
+      + 2 * W * Wp * L(N, 2 * N - 2)
     )
   }
 
