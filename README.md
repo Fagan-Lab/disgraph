@@ -14,10 +14,3 @@ You can install the current version of the package from GitHub directly using (t
 install_github("Fagan-Lab/disgraph")
 ```
 
-## Examples
-
-``` r
-library(disgraph)
-## basic example code
-```
-
