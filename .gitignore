@@ -44,3 +44,5 @@ inst/doc
 doc
 Meta
 .Rproj.user
+
+.DS_Store
