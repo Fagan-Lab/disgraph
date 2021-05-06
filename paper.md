@@ -9,17 +9,17 @@ tags:
 authors:
   - name: Anshuman Swain
     orcid: 0000-0002-9180-2222
-    affiliation: '1, 2'
+    affiliation: 1
   - name: Travis Byrum
-    affiliation: 2
+    affiliation: 1
   - name: Zhaoyi Zhuang
-    affiliation: 3
+    affiliation: 1
   - name: Luke Perry
-    affiliation: 3
+    affiliation: 1
   - name: Michael Lin
-    affiliation: 3
+    affiliation: 1
   - name: William F Fagan
-    affiliation: 3
+    affiliation: 1
 affiliations:
   - name: Department of Biology, University of Maryland, College Park
     index: 1
