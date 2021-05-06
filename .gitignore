@@ -48,3 +48,4 @@ Meta
 .DS_Store
 
 misc/
+.vscode/
