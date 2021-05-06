@@ -1,3 +1,5 @@
+name: Draft Paper
+
 on:
   push:
     branches:

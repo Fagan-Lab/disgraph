@@ -34,28 +34,6 @@ A large number of methods are being developed in the network science community t
 We provide a suite of three packages which will provide a central suite of standardized network inference methods from time-series data (constructnet), distance metrics (disgraph) and (process) simulation models (dynet) to the growing R network analysis environment and would help ecologists and biologists to perform and compare methods under one roof.
 These packages are implemented in a coherent, consistent framework – making comparisons across methods and metrics easier. We hope that these tools in R will help increase the accessibility of network tools to ecologists and other biologists, who the language for most of their analysis.
 
-# Statement of need
-
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
-
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the _Gaia_ mission
-[@gaia] by students and experts alike.
-
 # Acknowledgements
 
 We would like to thank Morelle Tchuindjo and Nathan Stiff for their contributions to the project. We

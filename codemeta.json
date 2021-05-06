@@ -1,0 +1,44 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "",
+      "@type": "Person",
+      "email": "tbyrum@terpmail.umd.edu",
+      "name": "Travis Byrum",
+      "affiliation": ""
+    },
+    {
+      "@id": "",
+      "@type": "Person",
+      "email": "",
+      "name": "Michael Lin",
+      "affiliation": ""
+    },
+    {
+      "@id": "",
+      "@type": "Person",
+      "email": "",
+      "name": "Nathan Stiff",
+      "affiliation": ""
+    },
+    {
+      "@id": "",
+      "@type": "Person",
+      "email": "answain@terpmail.umd.edu",
+      "name": "Anshuman Swain",
+      "affiliation": ""
+    }
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/Fagan-Lab/disgraph",
+  "datePublished": "2021-05-06",
+  "dateModified": "2021-05-06",
+  "dateCreated": "2021-05-06",
+  "description": "Inferring, comparing and exploring ecological networks from time-series data through R packages constructnet, disgraph and dynet",
+  "keywords": "Time-series networks, network construction, graph distance, network dynamics, ecological networks",
+  "license": "MIT",
+  "title": "disgraph",
+  "version": "v1.0.0"
+}
